@@ -9,13 +9,24 @@ function script(){
         
     userDB.count = prompt('Сколько фильмов вы уже посмотрели?', 2); 
 
-    for (let i = 0; i < userDB.count; i++)
-    {
-        
+    if (userDB.count < 10){
+        alert("Просмотрено довольно мало фильмов");
+    }
+    else if (userDB.count >= 10 && userDB.count < 30){
+        alert("Вы классический зритель");
+    }
+    else if (userDB.count >= 30){
+        alert("Вы киноман!");
+    }
+    else {
+        alert("Произошла ошибка!");
+    }
+
+    for (let i = 0; i < userDB.count; i++){
         let answer = ask();
         let name = answer.movieName;
-        let rating = answer.movieRating;
-    
+        let rating = answer.movieRating;      
+
         userDB.movies[name] = rating;
     }
 
@@ -25,6 +36,13 @@ function script(){
 function ask(){
     
     let movieName = prompt("Один из последних просмотренных фильмов?");
+    let isNeedToAskAgain = (movieName === '') || (movieName.length > 50);
+
+    if (isNeedToAskAgain){
+        alert("Невалидный ввод :( ");
+        return ask();
+    }
+
     let movieRating = prompt("На сколько оцените его?");
 
     return {movieName, movieRating};
