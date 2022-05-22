@@ -5,15 +5,10 @@ import PersonalMovieDB from './PersonalMovieDB.js';
 script();
 
 function script(){
-    let db = new PersonalMovieDB();
-        db.count = prompt('Сколько фильмов вы уже посмотрели?', 2); 
-        db.movies = {};
-        db.actors = {};
-        db.genres = [];
-        db.privat = false;
-       
+    let db = new PersonalMovieDB(0, {}, {}, [], false);
+        
+    db.count = prompt('Сколько фильмов вы уже посмотрели?', 2); 
     
-
     for (let i = 0; i < db.count; i++)
     {
         
