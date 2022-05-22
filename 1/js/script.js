@@ -5,21 +5,21 @@ import PersonalMovieDB from './PersonalMovieDB.js';
 script();
 
 function script(){
-    let db = new PersonalMovieDB(0, {}, {}, [], false);
+    let userDB = new PersonalMovieDB(0, {}, {}, [], false);
         
-    db.count = prompt('Сколько фильмов вы уже посмотрели?', 2); 
-    
-    for (let i = 0; i < db.count; i++)
+    userDB.count = prompt('Сколько фильмов вы уже посмотрели?', 2); 
+
+    for (let i = 0; i < userDB.count; i++)
     {
         
         let answer = ask();
         let name = answer.movieName;
         let rating = answer.movieRating;
     
-        db.movies[name] = rating;
+        userDB.movies[name] = rating;
     }
 
-    console.log(db.movies);
+    console.log(userDB.movies);
 }
 
 function ask(){
