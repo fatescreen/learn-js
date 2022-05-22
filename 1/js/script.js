@@ -1,4 +1,5 @@
-"use strict";
+/*jslint node: true */
+'use strict';
 
 import PersonalMovieDB from './PersonalMovieDB.js';
 
