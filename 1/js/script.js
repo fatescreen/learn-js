@@ -8,12 +8,19 @@ let userDB = new PersonalMovieDB(0, {}, {}, [], false);
 start(userDB);
 detectPersonalLevel(userDB);
 rememberMyFilms(userDB);
+writeYourGenres(userDB);
 showMyDB(userDB);
 
 function showMyDB(userDB){
     if (userDB.privat == false)
     {
         console.log(userDB);
+    }
+}
+
+function writeYourGenres(userDB){
+    for (let i = 1; i <= 3; i++){
+        userDB.genres[i-1] = prompt("Ваш любимый жанр под номером "+ i);
     }
 }
 
