@@ -2,14 +2,31 @@
 'use strict';
 
 import PersonalMovieDB from './PersonalMovieDB.js';
+let userDB = new PersonalMovieDB(0, {}, {}, [], false);
 
-script();
 
-function script(){
-    let userDB = new PersonalMovieDB(0, {}, {}, [], false);
-        
-    userDB.count = prompt('Сколько фильмов вы уже посмотрели?', 2); 
+start();
+detectPersonalLevel();
+rememberMyFilms();
 
+function start(){
+    userDB.count = prompt('Сколько фильмов вы уже посмотрели?', 2);
+}
+
+function rememberMyFilms(){
+
+    for (let i = 0; i < userDB.count; i++){
+        let answer = ask();
+        let name = answer.movieName;
+        let rating = answer.movieRating;      
+
+        userDB.movies[name] = rating;
+    }
+
+    console.log(userDB.movies);
+}
+
+function detectPersonalLevel(){
     if (userDB.count < 10){
         alert("Просмотрено довольно мало фильмов");
     }
@@ -22,16 +39,6 @@ function script(){
     else {
         alert("Произошла ошибка!");
     }
-
-    for (let i = 0; i < userDB.count; i++){
-        let answer = ask();
-        let name = answer.movieName;
-        let rating = answer.movieRating;      
-
-        userDB.movies[name] = rating;
-    }
-
-    console.log(userDB.movies);
 }
 
 function ask(){
