@@ -5,15 +5,23 @@ import PersonalMovieDB from './PersonalMovieDB.js';
 let userDB = new PersonalMovieDB(0, {}, {}, [], false);
 
 
-start();
-detectPersonalLevel();
-rememberMyFilms();
+start(userDB);
+detectPersonalLevel(userDB);
+rememberMyFilms(userDB);
+showMyDB(userDB);
 
-function start(){
+function showMyDB(userDB){
+    if (userDB.privat == false)
+    {
+        console.log(userDB);
+    }
+}
+
+function start(userDB){
     userDB.count = prompt('Сколько фильмов вы уже посмотрели?', 2);
 }
 
-function rememberMyFilms(){
+function rememberMyFilms(userDB){
 
     for (let i = 0; i < userDB.count; i++){
         let answer = ask();
@@ -22,11 +30,9 @@ function rememberMyFilms(){
 
         userDB.movies[name] = rating;
     }
-
-    console.log(userDB.movies);
 }
 
-function detectPersonalLevel(){
+function detectPersonalLevel(userDB){
     if (userDB.count < 10){
         alert("Просмотрено довольно мало фильмов");
     }
