@@ -14,22 +14,6 @@
 
 "use strict";
 
-let ads = Array.from(document.getElementsByClassName("promo__adv"));
-
-ads.forEach(element => {
-    element.remove();
-});
-
-document.querySelector(".promo__genre").innerHTML = "ДРАМА";
-
-document.querySelector(".promo__bg").style.backgroundImage = 'url("img/bg.jpg")';
-
-let watchedMovies = document.querySelector(".promo__interactive-list");
-
-console.log(watchedMovies);
-
-
-
 const movieDB = {
     movies: [
         "Логан",
@@ -40,17 +24,60 @@ const movieDB = {
     ]
 };
 
-movieDB.movies.sort();
-
-watchedMovies.innerHTML = '';
-
-movieDB.movies.forEach(element => {
-    watchedMovies.innerHTML += `<li class="promo__interactive-item">
-        ${element}
-        <div class="delete"></div>
-        </li>`;
-});
+const movies = movieDB.movies;
+const ads = Array.from(document.getElementsByClassName("promo__adv"));
+const watchedMovies = document.querySelector(".promo__interactive-list");
+const form = document.querySelector("form.add");
+const input = form.querySelector(".adding__input");
+const checkBox = form.querySelector('[type="checkbox"]');
 
 
 
+configuration();
+form.addEventListener("submit", formSubmitCallback);
+updateMovies(movieDB.movies, watchedMovies);
 
+
+
+function configuration(){
+    ads.forEach(element => {
+        element.remove();
+    });
+
+    document.querySelector(".promo__genre").innerHTML = "ДРАМА";
+    document.querySelector(".promo__bg").style.backgroundImage = 'url("img/bg.jpg")';
+}
+
+function updateMovies(movies, moviesElement){    
+    moviesElement.innerHTML = '';
+    movies.sort();
+
+    movies.forEach(element => {
+        moviesElement.innerHTML += `<li class="promo__interactive-item">
+            ${element}
+            <div class="delete"></div>
+            </li>`;
+    });
+
+    
+}
+
+function formSubmitCallback(event){
+    const maxInputSymbols = 21;
+    event.preventDefault();
+    let isInputTooLong = (String(input.value).length >= maxInputSymbols);
+
+    if (isInputTooLong === false){
+        movies.push(input.value);
+    }
+    else if (isInputTooLong === true){
+        let cuttedInput = String(input.value).substring(0, maxInputSymbols) + "...";        
+        movies.push(cuttedInput);
+    }
+
+    updateMovies(movies, watchedMovies);
+}
+
+
+
+console.log(form);
