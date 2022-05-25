@@ -12,7 +12,23 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
-'use strict';
+"use strict";
+
+let ads = Array.from(document.getElementsByClassName("promo__adv"));
+
+ads.forEach(element => {
+    element.remove();
+});
+
+document.querySelector(".promo__genre").innerHTML = "ДРАМА";
+
+document.querySelector(".promo__bg").style.backgroundImage = 'url("img/bg.jpg")';
+
+let watchedMovies = document.querySelector(".promo__interactive-list");
+
+console.log(watchedMovies);
+
+
 
 const movieDB = {
     movies: [
@@ -23,4 +39,18 @@ const movieDB = {
         "Скотт Пилигрим против..."
     ]
 };
+
+movieDB.movies.sort();
+
+watchedMovies.innerHTML = '';
+
+movieDB.movies.forEach(element => {
+    watchedMovies.innerHTML += `<li class="promo__interactive-item">
+        ${element}
+        <div class="delete"></div>
+        </li>`;
+});
+
+
+
 
