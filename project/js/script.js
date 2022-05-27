@@ -65,15 +65,13 @@ function updateMovies(movies, moviesElement){
 function formSubmitCallback(event){
     const maxInputSymbols = 21;
     event.preventDefault();
+    let newMovieName = input.value;
     let isInputTooLong = (String(input.value).length >= maxInputSymbols);
 
-    if (isInputTooLong === false){
-        movies.push(input.value);
+    if (isInputTooLong){
+        newMovieName = `${newMovieName.substring(0, maxInputSymbols)}...`;
     }
-    else if (isInputTooLong === true){
-        let cuttedInput = String(input.value).substring(0, maxInputSymbols) + "...";        
-        movies.push(cuttedInput);
-    }
+    movies.push(newMovieName);
 
     updateMovies(movies, watchedMovies);
 }
