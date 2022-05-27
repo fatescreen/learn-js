@@ -24,7 +24,6 @@ const movieDB = {
     ]
 };
 
-const movies = movieDB.movies;
 const ads = Array.from(document.getElementsByClassName("promo__adv"));
 const watchedMovies = document.querySelector(".promo__interactive-list");
 const form = document.querySelector("form.add");
@@ -59,7 +58,21 @@ function updateMovies(movies, moviesElement){
             </li>`;
     });
 
-    
+    let trashes = moviesElement.querySelectorAll(".delete");
+    console.log(trashes);
+
+    trashes.forEach(trash => {
+        trash.addEventListener("click", ()=>{
+            let trashName = trash.parentElement.innerText;   
+            console.log(trashName);
+
+            movieDB.movies = movies.filter((e) => {
+                return (e.toLowerCase() !== trashName.toLowerCase());
+            });
+            trash.parentElement.remove();
+            updateMovies(movieDB.movies, moviesElement);
+        });
+    });
 }
 
 function formSubmitCallback(event){
@@ -71,9 +84,9 @@ function formSubmitCallback(event){
     if (isInputTooLong){
         newMovieName = `${newMovieName.substring(0, maxInputSymbols)}...`;
     }
-    movies.push(newMovieName);
+    movieDB.movies.push(newMovieName);
 
-    updateMovies(movies, watchedMovies);
+    updateMovies(movieDB.movies, watchedMovies);
 }
 
 
