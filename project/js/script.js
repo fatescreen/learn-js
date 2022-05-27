@@ -59,13 +59,10 @@ function updateMovies(movies, moviesElement){
     });
 
     let trashes = moviesElement.querySelectorAll(".delete");
-    console.log(trashes);
 
     trashes.forEach(trash => {
         trash.addEventListener("click", ()=>{
-            let trashName = trash.parentElement.innerText;   
-            console.log(trashName);
-
+            let trashName = trash.parentElement.innerText;
             movieDB.movies = movies.filter((e) => {
                 return (e.toLowerCase() !== trashName.toLowerCase());
             });
@@ -84,11 +81,13 @@ function formSubmitCallback(event){
     if (isInputTooLong){
         newMovieName = `${newMovieName.substring(0, maxInputSymbols)}...`;
     }
+
+    if(checkBox.checked)
+    {
+        console.log("Добавляем любимый фильм.");
+    }
+
     movieDB.movies.push(newMovieName);
 
     updateMovies(movieDB.movies, watchedMovies);
 }
-
-
-
-console.log(form);
